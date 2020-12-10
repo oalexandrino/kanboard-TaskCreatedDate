@@ -13,11 +13,7 @@ Requirements
 ------------
 
 - Kanboard >= 1.0.35
-- Development and tested in the following environment
--- kanboard-1.2.15
--- MySQL 8.0.22-0ubuntu0.20.04.2
--- PHP Version 7.4.12
-
+- Development and tested in the following environment: kanboard-1.2.15, MySQL 8.0.22-0ubuntu0.20.04.2, and PHP Version 7.4.12
 
 Installation
 ------------
