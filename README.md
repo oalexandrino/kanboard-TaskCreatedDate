@@ -1,13 +1,20 @@
-TaskCreatedDate
+A plugin for Kanboard app
 ==============================
 
-This plugin allows you to update the created date for a given task.
+- This is a plugin coded to be used by Kanboard app.
+- Kanboard is mainly developed by Frédéric Guillot, but more than 267+ people have contributed.
+- Kanboard is a free and open source Kanban project management software.
+
+TaskCreatedDate plugin
+==============================
+
+- This plugin allows you to update the created date for a given task.
 
 Author
 ------
 
 - Olavo Alexandrino [www.oalexandrino.com.br]
-- License MIT
+- This plugin is distributed under the permissive MIT License
 
 Requirements
 ------------
