@@ -57,6 +57,16 @@ Very important
 
 ### Everything will be recorded
 
-* Keep in mind that every change (who did it and when did it) will be recorded at the page activity stream of the this task.
+* Keep in mind that every change (who did it and when did it) will be recorded at the page activity stream of the this task..
+
+Business restrictions
+-------------
+
+* Only administrators can update task creation dates.
+* You are not allowed to update tasks assigned to someone else.
+* The provided date must be earlier than the task due date.
+* The provided date must be earlier than the task started date.
+* The provided date must be earlier than the task completed date.
+* The provided date must be earlier than the last date of movement of the task.
 
 
