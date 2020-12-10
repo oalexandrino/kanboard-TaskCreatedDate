@@ -48,20 +48,35 @@ class TaskCreatedDateController extends BaseController
         
         $values['id'] = $task['id'];
         $values['project_id'] = $task['project_id'];
-        $date = \DateTime::createFromFormat('d/m/Y H:i', $values["date_creation"]);
-        $values["date_creation"] = $date->getTimestamp();
 
-        if ( $values["date_creation"] >= $task['date_due'] )
+        if (isset($values["date_creation"]) && !empty($values["date_creation"]))
+        {
+            $date = \DateTime::createFromFormat('d/m/Y H:i', $values["date_creation"]);
+            $values["date_creation"] = $date->getTimestamp();
+        }
+        else
         {
             $aux = false;
-            $message = 'The provided date must be earlier than the due date.';            
+            $message = 'You must provide a valid date.';              
         }
 
-        if ( $values["date_creation"] >= $task['date_started'] )
+        if ($task['date_due'] > 0 && $values["date_creation"] >= $task['date_due'] )
         {
             $aux = false;
-            $message = 'The provided date must be earlier than the started date.';            
+            $message = 'The provided date must be earlier than the task due date.';            
+        }
+
+        if ($task['date_started'] > 0 &&  $values["date_creation"] >= $task['date_started'] )
+        {
+            $aux = false;
+            $message = 'The provided date must be earlier than the task started date.';            
         }        
+
+        if ($task['date_completed'] > 0 &&  $values["date_creation"] >= $task['date_completed'] )
+        {
+            $aux = false;
+            $message = 'The provided date must be earlier than the task completed date.';            
+        }                
         
         if (!$aux)
         {
