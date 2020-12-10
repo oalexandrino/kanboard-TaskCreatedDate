@@ -1,7 +1,5 @@
 <?php
-
 namespace Kanboard\Plugin\TaskCreatedDate;
-
 use Kanboard\Core\Plugin\Base;
 use Kanboard\Core\Translator;
 
@@ -26,7 +24,7 @@ class Plugin extends Base
     {
         return t('This plugin allows you to update the created date for a given task.');
     }
-
+ 
     public function getPluginAuthor()
     {
         return 'Olavo Alexandrino';
@@ -39,7 +37,7 @@ class Plugin extends Base
 
     public function getPluginHomepage()
     {
-        return 'https://github.com/kanboard/plugin-myplugin';
+        return 'https://github.com/oalexandrino/TaskCreatedDate';
     }
 
     /**
@@ -84,7 +82,4 @@ class Plugin extends Base
           
       ];
     }   
-
-    
 }
-
