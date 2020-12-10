@@ -8,7 +8,7 @@
                 <?= $this->modal->replaceLink(t('Updating the creation date'), 'TaskCreatedDateController', 'creationdate', array('task_id'=>$task_id, 'project_id' => $project['id'] , 'plugin' => 'TaskCreatedDate')) ?>
             </li>           
             <li <?= $this->app->checkMenuSelection('TaskCreatedDateController', 'warning') ?>>
-                <?= $this->modal->replaceLink(t('Warning at updating this field'), 'TaskCreatedDateController', 'warning', array('task_id'=>$task_id, 'project_id' => $project['id'] , 'plugin' => 'TaskCreatedDate')) ?>
+                <?= $this->modal->replaceLink(t('Reading the warning message'), 'TaskCreatedDateController', 'warning', array('task_id'=>$task_id, 'project_id' => $project['id'] , 'plugin' => 'TaskCreatedDate')) ?>
             </li>              
         </ul>    
     <?php endif ?>    

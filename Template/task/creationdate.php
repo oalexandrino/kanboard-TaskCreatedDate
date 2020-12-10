@@ -1,10 +1,10 @@
 <?php if ($this->app->isAjax()): ?>
     <div class="page-header">
-        <h2><?= $this->text->e($project['name']) ?> &gt; <?= t('Edit the task date creation') ?></h2>
+        <h2><?= $this->text->e($project['name']) ?> &gt; <?= t('Edit the task creation date') ?></h2>
     </div>
 <?php else: ?>
     <div class="page-header">
-        <h2><?= t('Edit the task date creation') ?></h2> 
+        <h2><?= t('Edit the task creation date') ?></h2> 
     </div>
 <?php endif ?>
 <fieldset>
