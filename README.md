@@ -6,7 +6,7 @@ This plugin allows you to update the created date for a given task.
 Author
 ------
 
-- Olavo Alexandrino
+- Olavo Alexandrino [www.oalexandrino.com.br]
 - License MIT
 
 Requirements
