@@ -36,6 +36,12 @@ class TaskCreatedDateController extends BaseController
         
         $task = $this->getTask();
         $user = $this->getUser();
+        
+        if (!$this->userSession->isAdmin())
+        {
+            $aux = false;
+            $message = 'Only administrators can update task creation dates.';
+        }
 
         if (isset($task['owner_id']) && $user['id'] != $task['owner_id'] ) 
         {
@@ -103,6 +109,8 @@ class TaskCreatedDateController extends BaseController
     public function update()
     {
         $user = $this->getUser();
+
+        
         $values = $this->request->getValues();
         $values["user_id"] = $user["id"];
         $settings = $this->taskCreatedDateSettingsModel->get();
