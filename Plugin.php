@@ -55,7 +55,7 @@ class Plugin extends Base
         {
             if($settings['enabled'] == 1)
             {
-                $this->template->hook->attach('template:task:form:second-column', 'TaskCreatedDate:task/taskformlink');
+                $this->template->hook->attach('template:task:form:second-column', 'TaskCreatedDate:task/creationdatelink');
             }
         }
         $this->template->hook->attach('template:config:sidebar', 'TaskCreatedDate:links/general_settings_link');

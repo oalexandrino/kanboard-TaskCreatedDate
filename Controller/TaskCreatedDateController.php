@@ -27,7 +27,6 @@ class TaskCreatedDateController extends BaseController
      * Updates the date creation for a given task
      * 
      * @author  Olavo Alexandrino
-     * @throws \Kanboard\Core\Controller\AccessForbiddenException
      * @return  void
      */       
     public function update_task()
@@ -126,7 +125,6 @@ class TaskCreatedDateController extends BaseController
         } else {
             $this->flash->failure(t('Unable to update.'));
         }
-
     }
 
     /**
