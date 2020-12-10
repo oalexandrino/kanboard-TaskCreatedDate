@@ -7,8 +7,8 @@
         <fieldset>
             <legend><?= t('Plugin enabled?') ?></legend>
             <?= $this->form->radios('enabled', array(
-                    '1' => t('Sim'),
-                    '0' => t('Não'),
+                    '1' => t('Yes'),
+                    '0' => t('No'),
                 ),
                 $general_settings
             ) ?>        
