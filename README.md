@@ -42,7 +42,7 @@ Documentation
 Very important
 -------------
 
-# Why do that?
+## Why do that?
 
 * Changing the task creation dates is a procedure that requires attention, responsibility, sincerity and respect for the team involved, as it will directly interfere the project's flow metrics.
 
