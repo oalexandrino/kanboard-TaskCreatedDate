@@ -39,23 +39,23 @@ Documentation
 9. Read the "Warning message" before going to the next page
 10. Provide a new and valid date for the creation date field
 
-Important
+Very important
 -------------
 
 - Why do that?
 
-* Changing the task creation dates is a procedure that requires attention, responsibility, sincerity and respect for the team involved, as it will directly interfere the project's flow metrics.
+# Changing the task creation dates is a procedure that requires attention, responsibility, sincerity and respect for the team involved, as it will directly interfere the project's flow metrics.
 
-- Who can do that?
+# Who can do that?
 
 * It should be done only by administrators and when there is a need to include an old task or when you forget to create a task at the right time.
 
-- Changes will affect your team performance
+# Changes will affect your team performance
 
 * You should not take advantage of this functionality because it will decrease or increase the lead time, reaction time, cycle time, and other insights of your team performance.
 
-- Everything will be recorded
+# Everything will be recorded
 
-*Keep in mind that every change (who did it and when did it) will be recorded at the page activity stream of the this task.
+* Keep in mind that every change (who did it and when did it) will be recorded at the page activity stream of the this task.
 
 
