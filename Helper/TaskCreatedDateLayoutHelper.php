@@ -12,7 +12,7 @@ use Kanboard\Core\Base;
 class TaskCreatedDateLayoutHelper extends LayoutHelper
 {
     /**
-     * Common layout for flowMetrics views
+     * Common layout for TaskCreatedDate views
      *
      * @access public
      * @param  string $template

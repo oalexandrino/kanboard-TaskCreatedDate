@@ -12,14 +12,14 @@ use Kanboard\Model\ProjectModel;
 class TaskCreatedDateSettingsModel extends Base
 {
     /**
-     * SQL table name for TaskCreatedDate general settings
+     * SQL table name for TaskCreatedDate  settings
      *
      * @var string
      */
     const TABLE = 'task_created_date_general_settings';    
 
     /**
-     * Updates TaskCreatedDate general settings
+     * Updates TaskCreatedDate  settings
      *
      * @author   Olavo Alexandrino
      * @access public
@@ -33,7 +33,7 @@ class TaskCreatedDateSettingsModel extends Base
     }
 
     /**
-     * Inserts the first record of TaskCreatedDate general settings
+     * Inserts the first record of TaskCreatedDate settings
      *
      * @author   Olavo Alexandrino
      * @access public
@@ -46,7 +46,7 @@ class TaskCreatedDateSettingsModel extends Base
     }
 
     /**
-     * Gets the TaskCreatedDate general settings
+     * Gets the TaskCreatedDate settings
      *
      * @author   Olavo Alexandrino
      * @access public

@@ -1,10 +1,8 @@
 <div class="flow-metrics-content">
     <div class="page-header">
-        <h2><?= t('TaskCreatedDate General settings') ?></h2>
+        <h2><?= t('TaskCreatedDate  settings') ?></h2>
     </div>
-
-    <form method="post" action="<?= $this->url->href('TaskCreatedDateController', 'update', array('plugin' => 'TaskCreatedDate')) ?>" autocomplete="off">
-
+    <form method="post" action="<?= $this->url->href('TaskCreatedDateController', 'update_settings', array('plugin' => 'TaskCreatedDate')) ?>" autocomplete="off">
         <?= $this->form->csrf() ?>
         <fieldset>
             <legend><?= t('Plugin enabled?') ?></legend>
@@ -29,5 +27,4 @@
             <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
         </div>
     </form>
-
 </div>            

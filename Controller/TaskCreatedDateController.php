@@ -6,13 +6,14 @@ use Kanboard\Model\TaskModificationModel;
 use Kanboard\Core\Controller\AccessForbiddenException;
 
 /**
- * TaskCreatedDateController Controller. It controls everything related to main settings of the plugin.
+ * TaskCreatedDateController Controller. 
+ * It controls everything related to main settings of the plugin.
  * @author   Olavo Alexandrino
  */
 class TaskCreatedDateController extends BaseController
 {
     /**
-     * Returns the general settings
+     * Returns the TaskCreatedDate settings
      * 
      * @author  Olavo Alexandrino
      * @return  array
@@ -33,7 +34,6 @@ class TaskCreatedDateController extends BaseController
     {
         $aux = true;
         $message = "";
-        
         $task = $this->getTask();
         $user = $this->getUser();
         
@@ -106,31 +106,36 @@ class TaskCreatedDateController extends BaseController
      * @author  Olavo Alexandrino
      * @return  void
      */       
-    public function update()
+    public function update_settings()
     {
         $user = $this->getUser();
-
-        
         $values = $this->request->getValues();
         $values["user_id"] = $user["id"];
         $settings = $this->taskCreatedDateSettingsModel->get();
-        
         $aux = false;
 
-        if (is_array($settings)) {
-            if ($this->taskCreatedDateSettingsModel->update($values)) {
+        if (is_array($settings)) 
+        {
+            if ($this->taskCreatedDateSettingsModel->update($values)) 
+            {
                 $aux = true;
             }
-        } else {
-            if ($this->taskCreatedDateSettingsModel->insert($values)) {
+        } 
+        else 
+        {
+            if ($this->taskCreatedDateSettingsModel->insert($values)) 
+            {
                 $aux = true;
             }
         }
 
-        if ($aux) {
+        if ($aux) 
+        {
             $this->flash->success(t('General settings has been updated successfully.'));
-            return $this->response->redirect($this->helper->url->to('TaskCreatedDateController', 'generalSettings', array('plugin' => 'TaskCreatedDate')), true);
-        } else {
+            return $this->response->redirect($this->helper->url->to('TaskCreatedDateController', 'settings', array('plugin' => 'TaskCreatedDate')), true);
+        } 
+        else 
+        {
             $this->flash->failure(t('Unable to update.'));
         }
     }
@@ -157,7 +162,7 @@ class TaskCreatedDateController extends BaseController
                     'user' => $user,
                     'project' => $project,  
                     'task' => $task,            
-                    'title' => t('TaskCreatedDate general settings'),
+                    'title' => t('TaskCreatedDate  settings'),
                 )));  
             }
             else
@@ -168,15 +173,17 @@ class TaskCreatedDateController extends BaseController
     }
 
   /**
-     * Shows the form view to update the creation date of the given task
+     * Shows a warning message in spite of updating the field
      * 
      * @author  Olavo Alexandrino
+     * @throws \Kanboard\Core\Controller\AccessForbiddenException
      * @return  void
      */     
     public function warning()
     {
         $user = $this->getUser();
         $project = $this->getProject();
+        $task = $this->getTask();        
         $settings = $this->taskCreatedDateController->get();
         
         if (is_array($settings))
@@ -186,8 +193,9 @@ class TaskCreatedDateController extends BaseController
                 $this->response->html($this->taskCreatedDateLayoutHelper->show('TaskCreatedDate:task/warning', 
                 array(
                     'user' => $user,
-                    'project' => $project,            
-                    'title' => t('TaskCreatedDate general settings'),
+                    'project' => $project, 
+                    'task'  => $task,
+                    'title' => t('TaskCreatedDate  settings'),
                 ))); 
             }
             else
@@ -196,15 +204,14 @@ class TaskCreatedDateController extends BaseController
             }
         }        
     }    
-    
 
     /**
-     * Shows the general settings view
+     * Shows the general settings form view
      * 
      * @author  Olavo Alexandrino
      * @return  void
      */      
-    public function generalSettings() 
+    public function settings() 
     {
         $general_settings = $this->taskCreatedDateSettingsModel->get();
         $user = null;
@@ -222,9 +229,9 @@ class TaskCreatedDateController extends BaseController
             );   
         }
   
-        $this->response->html($this->helper->layout->config('TaskCreatedDate:config/general_settings_view', 
+        $this->response->html($this->helper->layout->config('TaskCreatedDate:config/settings', 
         array(
-            'title' => t('TaskCreatedDate general settings'),
+            'title' => t('TaskCreatedDate  settings'),
             'user' => $user,
             'general_settings' => $general_settings,
         )));        

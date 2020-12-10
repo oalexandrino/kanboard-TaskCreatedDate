@@ -8,6 +8,13 @@
     </div>
 <?php endif ?>
 <fieldset>
+    <legend><?= t("Warning") ?></legend> 
+        <p class="alert">
+            <?= t("Before updating this field, have a look at the"); ?> 
+            <?= $this->modal->replaceLink(t('warning messsage'), 'TaskCreatedDateController', 'warning', array('task_id'=>$task['id'], 'project_id' => $project['id'] , 'plugin' => 'TaskCreatedDate')) ?>.
+        </p>
+</fieldset>          
+<fieldset>
     <legend><?= t("Task details") ?></legend>    
     <?= $this->render('task/details', array(
     'task' => $task,

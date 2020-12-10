@@ -1,3 +1,3 @@
-<li <?= $this->app->checkMenuSelection('TaskCreatedDateController', 'generalSettings') ?>>
-    <?= $this->url->link(t('TaskCreatedDate'), 'TaskCreatedDateController', 'generalSettings', array('plugin' => 'TaskCreatedDate')) ?>
+<li <?= $this->app->checkMenuSelection('TaskCreatedDateController', 'settings') ?>>
+    <?= $this->url->link(t('TaskCreatedDate settings'), 'TaskCreatedDateController', 'settings', array('plugin' => 'TaskCreatedDate')) ?>
 </li>
