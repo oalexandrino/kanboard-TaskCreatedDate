@@ -3,6 +3,7 @@ namespace Kanboard\Plugin\TaskCreatedDate\Controller;
 use Kanboard\Controller\BaseController;
 use Kanboard\Plugin\TaskCreatedDate\Model\TaskCreatedDateSettingsModel;
 use Kanboard\Model\TaskModificationModel;
+use Kanboard\Core\Controller\AccessForbiddenException;
 
 /**
  * TaskCreatedDateController Controller. It controls everything related to main settings of the plugin.
@@ -26,13 +27,23 @@ class TaskCreatedDateController extends BaseController
      * Updates the date creation for a given task
      * 
      * @author  Olavo Alexandrino
+     * @throws \Kanboard\Core\Controller\AccessForbiddenException
      * @return  void
      */       
     public function update_task()
     {
-        $aux = false;
+        $aux = true;
+        $message = "";
         
         $task = $this->getTask();
+        $user = $this->getUser();
+
+        if (isset($task['owner_id']) && $user['id'] != $task['owner_id'] ) 
+        {
+            $aux = false;
+            $message = 'You are not allowed to update tasks assigned to someone else.';
+        }
+
         $values = $this->request->getValues();
         
         $values['id'] = $task['id'];
@@ -40,13 +51,33 @@ class TaskCreatedDateController extends BaseController
         $date = \DateTime::createFromFormat('d/m/Y H:i', $values["date_creation"]);
         $values["date_creation"] = $date->getTimestamp();
 
-        if ($this->taskModificationModel->update($values)) {
-            $this->flash->success(t('Task updated successfully.'));
-            return $this->response->redirect($this->helper->url->to('TaskCreatedDateController', 'creationdate', array('task_id' => $task["id"] ,'project_id' => $task["project_id"] ,'plugin' => 'TaskCreatedDate')), true);
-        } else {
-            $this->flash->failure(t('Unable to update your task.'));
-        }        
+        if ( $values["date_creation"] >= $task['date_due'] )
+        {
+            $aux = false;
+            $message = 'The provided date must be earlier than the due date.';            
+        }
 
+        if ( $values["date_creation"] >= $task['date_started'] )
+        {
+            $aux = false;
+            $message = 'The provided date must be earlier than the started date.';            
+        }        
+        
+        if (!$aux)
+        {
+            $this->flash->failure(t($message));
+            return $this->response->redirect($this->helper->url->to('TaskCreatedDateController', 'creationdate', array('task_id' => $task["id"] ,'project_id' => $task["project_id"] ,'plugin' => 'TaskCreatedDate')), true);
+        }
+        else
+        {
+            if ($this->taskModificationModel->update($values)) {
+                $this->flash->success(t('Task updated successfully.'));
+                return $this->response->redirect($this->helper->url->to('TaskCreatedDateController', 'creationdate', array('task_id' => $task["id"] ,'project_id' => $task["project_id"] ,'plugin' => 'TaskCreatedDate')), true);
+            } else {
+                $this->flash->failure(t('Unable to update your task.'));
+                return $this->response->redirect($this->helper->url->to('TaskCreatedDateController', 'creationdate', array('task_id' => $task["id"] ,'project_id' => $task["project_id"] ,'plugin' => 'TaskCreatedDate')), true);
+            }   
+        }
     }
 
     /**
