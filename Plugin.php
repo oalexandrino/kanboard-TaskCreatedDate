@@ -71,10 +71,11 @@ class Plugin extends Base
     {
       return [
           'Plugin\TaskCreatedDate\Controller' => [
-              'TaskCreatedDateSettingsController',
+              'TaskCreatedDateController',
           ],
           'Plugin\TaskCreatedDate\Helper' => [
               'TaskCreatedDateLayoutHelper',
+              'TaskCreatedDateHelper', 
           ],          
           'Plugin\TaskCreatedDate\Model' => [
               'TaskCreatedDateSettingsModel',

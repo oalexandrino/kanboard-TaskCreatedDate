@@ -1,13 +1,14 @@
 <?php
 namespace Kanboard\Plugin\TaskCreatedDate\Controller;
 use Kanboard\Controller\BaseController;
-use Kanboard\Plugin\TaskCreatedDate\Model\taskCreatedDateSettingsModel;
+use Kanboard\Plugin\TaskCreatedDate\Model\TaskCreatedDateSettingsModel;
+use Kanboard\Model\TaskModificationModel;
 
 /**
- * TaskCreatedDateSettingsController Controller. It controls everything related to main settings of the plugin.
+ * TaskCreatedDateController Controller. It controls everything related to main settings of the plugin.
  * @author   Olavo Alexandrino
  */
-class TaskCreatedDateSettingsController extends BaseController
+class TaskCreatedDateController extends BaseController
 {
     /**
      * Returns the general settings
@@ -20,6 +21,33 @@ class TaskCreatedDateSettingsController extends BaseController
         $settings = $this->taskCreatedDateSettingsModel->get();
         return $settings;
     } 
+
+    /**
+     * Updates the date creation for a given task
+     * 
+     * @author  Olavo Alexandrino
+     * @return  void
+     */       
+    public function update_task()
+    {
+        $aux = false;
+        
+        $task = $this->getTask();
+        $values = $this->request->getValues();
+        
+        $values['id'] = $task['id'];
+        $values['project_id'] = $task['project_id'];
+        $date = \DateTime::createFromFormat('d/m/Y H:i', $values["date_creation"]);
+        $values["date_creation"] = $date->getTimestamp();
+
+        if ($this->taskModificationModel->update($values)) {
+            $this->flash->success(t('Task updated successfully.'));
+            return $this->response->redirect($this->helper->url->to('TaskCreatedDateController', 'creationdate', array('task_id' => $task["id"] ,'project_id' => $task["project_id"] ,'plugin' => 'TaskCreatedDate')), true);
+        } else {
+            $this->flash->failure(t('Unable to update your task.'));
+        }        
+
+    }
 
     /**
      * Updates the general settings
@@ -48,7 +76,7 @@ class TaskCreatedDateSettingsController extends BaseController
 
         if ($aux) {
             $this->flash->success(t('General settings has been updated successfully.'));
-            return $this->response->redirect($this->helper->url->to('TaskCreatedDateSettingsController', 'generalSettings', array('plugin' => 'TaskCreatedDate')), true);
+            return $this->response->redirect($this->helper->url->to('TaskCreatedDateController', 'generalSettings', array('plugin' => 'TaskCreatedDate')), true);
         } else {
             $this->flash->failure(t('Unable to update.'));
         }
@@ -61,16 +89,17 @@ class TaskCreatedDateSettingsController extends BaseController
      * @author  Olavo Alexandrino
      * @return  void
      */     
-    public function form()
+    public function creationdate()
     {
         $user = $this->getUser();
-        
-        $project = $this->getProject();        
+        $project = $this->getProject();   
+        $task = $this->getTask();
 
         $this->response->html($this->taskCreatedDateLayoutHelper->show('TaskCreatedDate:task/creationdate', 
         array(
             'user' => $user,
-            'project' => $project,            
+            'project' => $project,  
+            'task' => $task,            
             'title' => t('TaskCreatedDate general settings'),
         )));  
     }

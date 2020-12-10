@@ -3,7 +3,7 @@
         <h2><?= t('TaskCreatedDate General settings') ?></h2>
     </div>
 
-    <form method="post" action="<?= $this->url->href('TaskCreatedDateSettingsController', 'update', array('plugin' => 'TaskCreatedDate')) ?>" autocomplete="off">
+    <form method="post" action="<?= $this->url->href('TaskCreatedDateController', 'update', array('plugin' => 'TaskCreatedDate')) ?>" autocomplete="off">
 
         <?= $this->form->csrf() ?>
         <fieldset>
