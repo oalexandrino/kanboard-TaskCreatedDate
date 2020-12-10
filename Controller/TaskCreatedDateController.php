@@ -143,17 +143,28 @@ class TaskCreatedDateController extends BaseController
      */     
     public function creationdate()
     {
+        $settings = $this->taskCreatedDateController->get();
         $user = $this->getUser();
         $project = $this->getProject();   
         $task = $this->getTask();
 
-        $this->response->html($this->taskCreatedDateLayoutHelper->show('TaskCreatedDate:task/creationdate', 
-        array(
-            'user' => $user,
-            'project' => $project,  
-            'task' => $task,            
-            'title' => t('TaskCreatedDate general settings'),
-        )));  
+        if (is_array($settings))
+        {
+            if($settings['enabled'] == 1)
+            {
+                $this->response->html($this->taskCreatedDateLayoutHelper->show('TaskCreatedDate:task/creationdate', 
+                array(
+                    'user' => $user,
+                    'project' => $project,  
+                    'task' => $task,            
+                    'title' => t('TaskCreatedDate general settings'),
+                )));  
+            }
+            else
+            {
+                throw new AccessForbiddenException(t('You are not allowed to update tasks assigned to someone else.'));                 
+            }
+        }
     }
 
   /**
@@ -165,15 +176,25 @@ class TaskCreatedDateController extends BaseController
     public function warning()
     {
         $user = $this->getUser();
+        $project = $this->getProject();
+        $settings = $this->taskCreatedDateController->get();
         
-        $project = $this->getProject();        
-
-        $this->response->html($this->taskCreatedDateLayoutHelper->show('TaskCreatedDate:task/warning', 
-        array(
-            'user' => $user,
-            'project' => $project,            
-            'title' => t('TaskCreatedDate general settings'),
-        )));  
+        if (is_array($settings))
+        {
+            if($settings['enabled'] == 1)
+            {
+                $this->response->html($this->taskCreatedDateLayoutHelper->show('TaskCreatedDate:task/warning', 
+                array(
+                    'user' => $user,
+                    'project' => $project,            
+                    'title' => t('TaskCreatedDate general settings'),
+                ))); 
+            }
+            else
+            {
+                throw new AccessForbiddenException(t('You are not allowed to update tasks assigned to someone else.'));                 
+            }
+        }        
     }    
     
 

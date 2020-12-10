@@ -50,7 +50,8 @@ class Plugin extends Base
      */ 
     private function attachTemplates() 
     {
-        $settings = $this->generalSettingsController->get();
+        $settings = $this->taskCreatedDateController->get();
+
         if (is_array($settings))
         {
             if($settings['enabled'] == 1)
