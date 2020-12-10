@@ -62,27 +62,33 @@ class TaskCreatedDateController extends BaseController
         else
         {
             $aux = false;
-            $message = 'You must provide a valid date.';              
+            $message = 'You must provide a valid date.';
         }
 
         if ($task['date_due'] > 0 && $values["date_creation"] >= $task['date_due'] )
         {
             $aux = false;
-            $message = 'The provided date must be earlier than the task due date.';            
+            $message = 'The provided date must be earlier than the task due date.';   
         }
 
         if ($task['date_started'] > 0 &&  $values["date_creation"] >= $task['date_started'] )
         {
             $aux = false;
-            $message = 'The provided date must be earlier than the task started date.';            
+            $message = 'The provided date must be earlier than the task started date.';   
         }        
 
         if ($task['date_completed'] > 0 &&  $values["date_creation"] >= $task['date_completed'] )
         {
             $aux = false;
-            $message = 'The provided date must be earlier than the task completed date.';            
+            $message = 'The provided date must be earlier than the task completed date.'; 
         }                
         
+        if ($task['date_moved'] > 0 &&  $values["date_creation"] >= $task['date_moved'] )
+        {
+            $aux = false;
+            $message = 'The provided date must be earlier than the last date of movement of the task.'; 
+        }            
+
         if (!$aux)
         {
             $this->flash->failure(t($message));
@@ -131,7 +137,7 @@ class TaskCreatedDateController extends BaseController
 
         if ($aux) 
         {
-            $this->flash->success(t('General settings has been updated successfully.'));
+            $this->flash->success(t('Settings has been updated successfully.'));
             return $this->response->redirect($this->helper->url->to('TaskCreatedDateController', 'settings', array('plugin' => 'TaskCreatedDate')), true);
         } 
         else 
@@ -167,7 +173,7 @@ class TaskCreatedDateController extends BaseController
             }
             else
             {
-                throw new AccessForbiddenException(t('You are not allowed to update tasks assigned to someone else.'));                 
+                throw new AccessForbiddenException(t('Plugin is not enabled.'));                 
             }
         }
     }

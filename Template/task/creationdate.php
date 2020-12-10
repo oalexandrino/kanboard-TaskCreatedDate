@@ -31,9 +31,9 @@
         array('project_id' => $project['id'],'task_id' => $task['id'], 'redirect' => 'creationdate', 'plugin' => 'TaskCreatedDate')) 
     ?>" 
     autocomplete="off">    
-        <legend><?= t("New date for the creation") ?></legend>    
+        <legend><?= t("New creation date") ?></legend>    
         <?= $this->form->csrf() ?>
-    <?= $this->helper->form->datetime(t('Created date'), 'date_creation', $task)?>
+    <?= $this->helper->form->datetime(t('Current created date'), 'date_creation', $task)?>
     <?= $this->modal->submitButtons(array('tabindex' => 13)) ?>
     </form>
 </fieldset>     
